@@ -14,6 +14,5 @@ pip install scrapy-user-agents
 
 2. Go to the VICE_ARTICLES folder then run the scrapy spider program
 ```
-cd VICE_ARTICLES
 scrapy crawl vice_article_spider -o filename.csv
 ```
