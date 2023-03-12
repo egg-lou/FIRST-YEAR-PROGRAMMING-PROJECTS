@@ -12,7 +12,7 @@ pip install Pandas
 pip install scrapy-user-agents
 ```
 
-2. Input these on the termninal
+2. Go to the VICE_ARTICLES folder then run the scrapy spider program
 ```
 cd VICE_ARTICLES
 scrapy crawl vice_article_spider -o filename.csv
