@@ -18,16 +18,10 @@ pip install scrapy-user-agents
 
 2. To run "usip" scrapy spider
 ```
-cd WEB-SCRAPING project
-cd USIP_WEBSITE
-cd USIP_SCRAPING
 scrapy crawl usip -o filename.csv
 ```
 
 3. To run "article_spider" scrapy spider
 ```
-cd WEB-SCRAPING project
-cd USIP_WEBSITE
-cd USIP_ARTICLE
 scrapy crawl article_spider -o filename .csv
 ```
