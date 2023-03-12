@@ -5,6 +5,7 @@ Contains two scrapy spider inside the two folders
 ```
 usip - spider to scrape the links of the articles for each page - USIP_SCRAPING Folder
 article_spider - spider to scrape the contents of an article from USIP article links scraped by usip spider - USIP_ARTICLE Folder
+```
 
 To run scrape the usip website for links and content:
 
