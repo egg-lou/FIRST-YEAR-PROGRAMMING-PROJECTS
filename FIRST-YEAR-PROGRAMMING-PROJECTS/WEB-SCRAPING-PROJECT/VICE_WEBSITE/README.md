@@ -2,11 +2,13 @@ The vice website is an organizational website that contains different types of p
 To be able to scrape this website for its news articles, Scrapy and the Pandas Python library was used.
 
 1. pip install scrapy and pandas
-
 ```
 pip install Scrapy
 pip install Pandas
+pip install scrapy-user-agents
 ```
+
+2. Run this command on the termninal
 
 
     1. Setup up first a virtual environment to install Scrapy and Pandas
