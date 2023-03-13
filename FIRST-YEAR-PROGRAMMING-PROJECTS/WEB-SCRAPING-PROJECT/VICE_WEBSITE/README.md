@@ -1,6 +1,7 @@
 The vice website is an organizational website that contains different types of publications.
 To be able to scrape this website for its news articles, Scrapy and the Pandas Python library was used.
 
+Only contains one scrapy spider named vice_article_spider
 
 Pre-Requisites
 ```
