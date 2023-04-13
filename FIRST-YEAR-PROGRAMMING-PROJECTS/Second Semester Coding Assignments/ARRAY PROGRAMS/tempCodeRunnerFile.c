@@ -1,0 +1,1 @@
+printf("%d c[%d] = %d\n", b, a, c[a]);
