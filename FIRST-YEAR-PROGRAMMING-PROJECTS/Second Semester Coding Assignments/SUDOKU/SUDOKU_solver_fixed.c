@@ -3,17 +3,17 @@
 
 #define SIZE 9
 
-int board [SIZE][SIZE] = {  0,0,7,  0,6,0,  0,4,2,
-                            2,0,0,  0,0,5,  6,0,0,
-                            1,0,6,  4,2,0,  5,3,0,
-                            
-                            0,7,1,  0,0,9,  0,0,0,
-                            0,6,3,  0,0,0,  2,1,0,
-                            0,0,0,  6,0,0,  8,7,0,
+int board [SIZE][SIZE] = {  5, 3, 0,   0, 7, 0,   0, 0, 0,
+                            6, 0, 0,   1, 9, 5,   0, 0, 0,
+                            0, 9, 8,   0, 0, 0,   0, 6, 0,
 
-                            0,5,9,  0,8,6,  4,0,1,
-                            0,0,8,  1,0,0,  0,0,3,
-                            3,1,0,  0,4,0,  9,0,0
+                            8, 0, 0,   0, 6, 0,   0, 0, 3,
+                            4, 0, 0,   8, 0, 3,   0, 0, 1,
+                            7, 0, 0,   0, 2, 0,   0, 0, 6,
+
+                            0, 6, 0,   0, 0, 0,   2, 8, 0,
+                            0, 0, 0,   4, 1, 9,   0, 0, 5,
+                            0, 0, 0,   0, 8, 0,   0, 7, 9
     }; 
 
 /*                          0,0,0,  0,0,0,  0,0,0,
@@ -70,61 +70,35 @@ void printBoard() {
     }
 }
 
-
-int solveSudoku(int x, int y){
-    int num = 1;
-    int temp_x = 0;
-    int temp_y = 0;
-
-    if(x == 9 && y == 9){
-        return 1;
+int solveSudoku(int x, int y) {
+    if (x == SIZE) {
+        return 1; // solution found
     }
-    if(board[x][y] !=  0){
-        if(x < 8){
-            temp_x = x + 1; 
-            temp_y = y;      
+    if (board[x][y] != 0) {
+        if (y == SIZE - 1) {
+            return solveSudoku(x + 1, 0); // move to next row
+        } else {
+            return solveSudoku(x, y + 1); // move to next column
         }
-        else{
-           temp_x = 0;
-            temp_y = y + 1;  
-        }
-    if(solveSudoku(temp_x, temp_y)){
-        return 1;
-    }else{
-        return 0;
     }
-}
-    
-    if(board [x][y] == 0){
-        while(num < 10){
-            if(!sameSquare(x, y, num) && !sameRow(x, y, num) && !sameColumn(x, y, num)){
-                board[x][y] = num;
-                if(x == 8 && y == 8){
-                    return 1;
+    for (int num = 1; num <= SIZE; num++) {
+        if (!sameRow(x, y, num) && !sameColumn(x, y, num) && !sameSquare(x, y, num)) {
+            board[x][y] = num;
+            if (y == SIZE - 1) {
+                if (solveSudoku(x + 1, 0)) {
+                    return 1; // solution found
                 }
-                if(x < 8){
-                    temp_x = x + 1;
-                }
-                else{
-                    temp_x = 0;
-                    temp_y = y + 1;
-                }   
-
-                if(solveSudoku(temp_x, temp_y)){
-                    return 1;
+            } else {
+                if (solveSudoku(x, y + 1)) {
+                    return 1; // solution found
                 }
             }
-            num++;
+            board[x][y] = 0; // backtrack
         }
-        if(x == 0 && y == 0){
-            printf("\nNO SOLUTION\n");
-        }
-
-        board[x][y] = 0;
-        return 0;
     }
-    return 0;
+    return 0; // no solution found
 }
+
 
 int sameRow(int x, int y, int num){
     for(int i = 0; i < SIZE; i++){
