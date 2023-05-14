@@ -9,13 +9,23 @@
 #define MAX_VALUE 9
 
 int board [SIZE][SIZE]; 
+int customBoard[SIZE][SIZE] = {0, 0, 0,     0, 5, 0,    8, 0, 0,
+                               7, 0, 0,     0, 0, 0,    0, 0, 1,
+                               6, 5, 3,     0, 0, 0,    9, 0, 0,
+
+                               0, 2, 0,     5, 0, 0,    0, 0, 0,
+                               0, 0, 8,     6, 3, 4,    7, 0, 0,
+                               0, 0, 0,     0, 0, 9,    0, 6, 0,
+
+                               0, 0, 1,     0, 0, 0,    2, 3, 5,
+                               2, 0, 0,     0, 0, 0,    0, 0, 7,
+                               0, 0, 4,     0, 7, 0,    0, 0, 0};
 void printBoard();
 int solveSudoku(int x, int y);
 int sameColumn(int x, int y, int num);
 int sameRow(int x, int y, int num);
 int sameSquare(int x, int y, int num);
 void generateBoard(int level);
-int fillBoard(int x, int y);
 void printOptions();
 void cleanBoard();
 
@@ -24,7 +34,7 @@ int main(){
     int x = 0;
     int y = 0;
     int userResponse, show, again;
-    printf("\nSUDOKU SOLVER");
+    printf("\nSUDOKU SOLVER 9x9");
 
 
 do {
@@ -38,6 +48,9 @@ do {
         
     } while(userResponse < 1 || userResponse > 5);
 
+    if(userResponse == 5)
+        break;
+        
     if(userResponse >= 1 && userResponse <= 4){
         generateBoard(userResponse);
         printf("\nShow Solved Board? [1] for YES and [2] for NO");
@@ -98,24 +111,25 @@ void printOptions(){
     printf("\n[5] Exit");
 
 }
-void printBoard() {
-    printf("\n-------------------------------\n");
-    // Loop over every row and column of the board.
-    for (int r = 0; r < SIZE; r++) {
-        printf("|");
-        // Print a horizontal line to separate the 3x3 boxes.
-        for (int c = 0; c < SIZE; c++) {
-            printf(" %d ",board[r][c]);
 
-            if((c + 1) % 3 == 0){
+void printBoard(){
+
+    for (int i = 0; i < 9; i++){
+        if (i % 3 == 0 && i != 0)
+            printf("\t-------------   -------------   -------------\n");
+        printf("\t-------------   -------------   -------------\n\t");
+        for (int j = 0; j < 9; j++){
+            if (j % 3 == 0 && j != 0)
+                printf("   ");
+
+            (board[i][j] != 0) ? printf("| %d ", board[i][j]) : printf("|   ");
+
+            if ((j + 1) % 3 == 0)
                 printf("|");
-            }
         }
         printf("\n");
-        if((r + 1) % 3 == 0){
-            printf("-------------------------------\n");
-        }
     }
+    printf("\t-------------   -------------   -------------\n");
 }
 
 int solveSudoku(int x, int y) {
@@ -167,28 +181,11 @@ int sameColumn(int x, int y, int num){
 }
 
 int sameSquare(int x, int y, int num){
-    if(x < 3){
-        x = 0;
-    }
-    else if(x < 6){
-        x = 3;
-    }
-    else{
-        x = 6;
-    }
+    int rowStart = (x / 3) * 3;
+    int colStart = (y / 3) * 3;
 
-    if(y < 3){
-        y = 0;
-    }
-    else if(y < 6){
-        y = 3;
-    }
-    else{
-        y = 6;
-    }
-
-    for (int i = x; i < x + 3; i++){
-        for (int j = y; j < y + 3; j++){
+    for (int i = rowStart; i < rowStart + 3; i++){
+        for (int j = colStart; j < colStart + 3; j++){
             if(board[i][j] == num){
                 return 1;
             }
@@ -200,7 +197,7 @@ int sameSquare(int x, int y, int num){
 
 
 void generateBoard(int level){
-    int i, j, num, row, col, count, cells_to_delete;
+    int i, j, num, row, col, count, cells_to_delete, custom;
     bool solvable;
     int nums_to_delete, nums_to_add;
 
@@ -208,32 +205,52 @@ void generateBoard(int level){
 
     if(level == 4){
         int count = 0;
+        do{
+            printf("\nLoad the custom board or input yourself? [1] for CUSTOM and [2] for INPUT");
+            printf("\nResponse: ");
+            scanf("%d", &custom);
 
-        printf("\nEnter how many numbers that will be added: " );
-        scanf("%d", &nums_to_add);
+            if(custom != 1 && custom != 2)
+                printf("\nINVALID INPUT!!!");
+        }while(custom != 1 && custom != 2);
+
+        if(custom == 1){
+            for(i  = 0; i < SIZE; i++){
+                for(j = 0; j < SIZE; j++){
+                    board[i][j] = customBoard[i][j];
+                }
+            }
+
+        }
         
-        // Fill in the remaining cells by asking the user for input.
-        int row, col, num;
-        while (count < nums_to_add) {
-            printBoard();
-            // Ask the user for input.
-            printf("Enter row (1-9), column (1-9), and number (1-9) (separated by spaces): ");
-            scanf("%d %d %d", &row, &col, &num);
-            // Convert the input to zero-based indices.
-            row--;
-            col--;
-            // If the input is valid...
-            if (row >= 0 && row < SIZE && col >= 0 && col < SIZE &&
-                num >= 1 && num <= MAX_VALUE && board[row][col] == 0 &&
-                !sameSquare(row, col, num) && !sameRow(row, col, num) && !sameColumn(row, col, num)) {
-                // Fill in the cell with the number.
-                board[row][col] = num;
-                // Increment the count of filled cells.
-                count++;
-                // Print out the updated state of the board.
-            } else {
-                // If the input is not valid, print an error message and try again.
-                printf("Invalid input, try again.\n");
+        else if(custom == 2){
+
+            printf("\nEnter how many numbers that will be added: " );
+            scanf("%d", &nums_to_add);
+            
+            // Fill in the remaining cells by asking the user for input.
+            int row, col, num;
+            while (count < nums_to_add) {
+                printBoard();
+                // Ask the user for input.
+                printf("Enter row (1-9), column (1-9), and number (1-9) (separated by spaces): ");
+                scanf("%d %d %d", &row, &col, &num);
+                // Convert the input to zero-based indices.
+                row--;
+                col--;
+                // If the input is valid...
+                if (row >= 0 && row < SIZE && col >= 0 && col < SIZE &&
+                    num >= 1 && num <= MAX_VALUE && board[row][col] == 0 &&
+                    !sameSquare(row, col, num) && !sameRow(row, col, num) && !sameColumn(row, col, num)) {
+                    // Fill in the cell with the number.
+                    board[row][col] = num;
+                    // Increment the count of filled cells.
+                    count++;
+                    // Print out the updated state of the board.
+                } else {
+                    // If the input is not valid, print an error message and try again.
+                    printf("Invalid input, try again.\n");
+                }
             }
         }
     }
@@ -243,10 +260,10 @@ void generateBoard(int level){
 
     
         switch(level){
-            case 1: nums_to_delete = 25; break;
-            case 2: nums_to_delete = 40; break;
-            case 3: nums_to_delete = 55; break;
-            default: nums_to_delete = 25; break;
+            case 1: nums_to_delete = 45; break;
+            case 2: nums_to_delete = 25; break;
+            case 3: nums_to_delete = 15; break;
+            default: nums_to_delete = 45; break;
         }
     
 
@@ -291,5 +308,3 @@ void generateBoard(int level){
     }
     printBoard();
 }
-
-
