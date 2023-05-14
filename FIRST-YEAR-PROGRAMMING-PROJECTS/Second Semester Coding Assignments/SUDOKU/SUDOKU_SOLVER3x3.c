@@ -85,14 +85,17 @@ void cleanBoard() {
 
 void printBoard() {
     for (int r = 0; r < SIZE; r++) { // Iterate through each row of the board
-        printf("\n---------------------\n"); // Print a horizontal line before each row
+        if(r == 0 || r == 3)
+            printf("\n+--------------------+\n"); // Print a horizontal line before each row
+        else
+            printf("\n----------------------\n");
         for (int c = 0; c < SIZE; c++) { // Iterate through each column of the row
-            printf("%s  %c  %s ", c < SIZE ? "|" : "", board[r][c] == 0 ? ' ' : board[r][c] + '0', c == SIZE - 1 ? "|" : "");
+            printf("%s  %c  %s ", c < SIZE ? "|" : "", board[r][c] == 0 ? ' ' : board[r][c] + '0', c == SIZE - 1 ? " |" : "");
             // If the cell is empty, print a space; otherwise, print the number in the cell
             // If it is the last column of the row, print a vertical line after the number
         }
     }
-    printf("\n---------------------\n"); // Print a horizontal line after the last row
+    printf("\n+--------------------+\n"); // Print a horizontal line after the last row
 }
 
 
@@ -177,4 +180,3 @@ void solver() {
     }
     printBoard(); // If all cells have been assigned valid values, print the solved board
 }
-

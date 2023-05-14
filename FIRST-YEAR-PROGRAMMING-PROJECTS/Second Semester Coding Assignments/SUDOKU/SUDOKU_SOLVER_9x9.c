@@ -195,7 +195,6 @@ int sameSquare(int x, int y, int num){
     return 0;
 }
 
-
 void generateBoard(int level){
     int i, j, num, row, col, count, cells_to_delete, custom;
     bool solvable;

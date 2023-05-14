@@ -106,14 +106,14 @@ void cleanBoard(){
 
 void printBoard() {
     for (int r = 0; r < 4; r++) { // Iterate through each row of the board
-        printf("\n+------+------+------+-----+\n"); // Print a horizontal line before each row
+        printf("\n+------+------+------+------+\n"); // Print a horizontal line before each row
         for (int c = 0; c < 4; c++) { // Iterate through each column of the row
-            printf("%s  %c  %s ", c < 4 ? "|" : "", board[r][c] == 0 ? ' ' : board[r][c] + '0', c == 4 - 1 ? "|" : "");
+            printf("%s  %c  %s ", c < 4 ? "|" : "", board[r][c] == 0 ? ' ' : board[r][c] + '0', c == 4 - 1 ? " |" : "");
             // If the cell is empty, print a space; otherwise, print the number in the cell
             // If it is the last column of the row, print a vertical line after the number
         }
     }
-    printf("\n+------+------+------+-----+\n"); // Print a horizontal line after the last row
+    printf("\n+------+------+------+------+\n"); // Print a horizontal line after the last row
 }
 
 
@@ -177,7 +177,6 @@ int sameSquare(int x, int y, int num){
             }
         }
     }
-
     return 0;
 }
 
