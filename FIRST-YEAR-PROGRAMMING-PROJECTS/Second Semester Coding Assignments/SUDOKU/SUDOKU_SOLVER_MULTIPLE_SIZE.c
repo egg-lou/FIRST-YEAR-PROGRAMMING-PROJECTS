@@ -75,7 +75,7 @@ int main(){
     do{
         printf("\nWELCOME TO THE SUDOKU SOLVER");
         printf("\nLooking for a 3x3 Solver? 4x4 Solver? or a 9x9 Solver?");
-        printf("\nWe've got it here all for you!!!");
+        printf("\nWe've got it all for you!!!");
 
         do{
             printf("\n\nAVAILABLE SUDOKU BOARD SOLVERS:");
@@ -100,7 +100,7 @@ int main(){
 
     }while(userChoice >= 1 && userChoice <= 3);
 
-    printf("\nThank you for using the SUDOKU SOLVER");
+    printf("\nThank you for using the SUDOKU SOLVER!!!");
     getch();
     return 0;
 }
@@ -122,10 +122,25 @@ switch(userChoice) {
 
             printf("\n3x3 Sudoku Solver");
             printf("\n===================");
-
             printOptions();
-            printf("\nResponse: ");
-            scanf("%d", &level);
+
+            do{
+               
+                printf("\nResponse: ");
+                scanf("%d", &level);
+
+                if(level < 1 || level > 5) {
+                    printf("\nINVALID INPUT!");
+                }
+                if(level ==5){
+                    break;
+                }
+
+            }while(level < 1 || level > 4);
+
+            if(level == 5){
+                break;
+            }
 
             if(level >=1 && level <= 3){
                 loader3x3(level, 10);
@@ -219,8 +234,11 @@ switch(userChoice) {
             if(userResponse < 1 || userResponse > 5) {
                 printf("\nINVALID INPUT!");
             }
+            if(userResponse == 5){
+                break;
+            }
         
-        } while(userResponse < 1 || userResponse > 5);
+        } while(userResponse < 1 || userResponse > 4);
 
         if(userResponse == 5) {
             break;
@@ -278,6 +296,10 @@ switch(userChoice) {
 
                 if(userResponse < 1 || userResponse > 5)
                     printf("\nINVALID INPUT!!! Valid options are 1 to 2.");
+                
+                if(userResponse == 5){
+                    break;
+                }
                 
             } while(userResponse < 1 || userResponse > 5);
 
