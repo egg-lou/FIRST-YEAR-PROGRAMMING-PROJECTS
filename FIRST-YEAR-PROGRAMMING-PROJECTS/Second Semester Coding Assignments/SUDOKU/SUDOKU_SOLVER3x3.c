@@ -20,8 +20,8 @@ int customBoard [SIZE][SIZE] = {  4, 0, 0,
                                         };
 
 void loader(int level, int getData);
-void printBoard();
 void solver();
+void printBoard();
 bool isValid(int row, int col, int num);
 void cleanBoard();
 void printOptions();
@@ -195,7 +195,6 @@ void loader(int level, int getData){
         return;
 
 
-
     if(level == 4){
         int count = 0; // Initialize counter to 0
         printBoard(); // Print the empty board
@@ -237,7 +236,6 @@ void loader(int level, int getData){
             }
             // Seed the random number generator with the current time.
             srand(time(0));
-            // Fill in 6 random cells to start with.
             while (count < nums_to_add) {
                 // Choose a random row and column.
                 int r = rand() % SIZE;
