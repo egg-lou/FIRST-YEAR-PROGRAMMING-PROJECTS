@@ -257,6 +257,7 @@ void loader(int level, int getData){
         }
 }
 
+
 // Solver Function to solve the Sudoku Board
 void solver() {
     int count = 0; // Initialize counter to 0
