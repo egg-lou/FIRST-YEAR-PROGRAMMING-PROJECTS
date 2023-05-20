@@ -8,6 +8,7 @@ DESCRIPTION: 3x3 SUDOKU SOLVER
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
+#include <conio.h>
 
 #define SIZE 3
 #define MAX_VALUE 9
@@ -15,7 +16,7 @@ DESCRIPTION: 3x3 SUDOKU SOLVER
 int SudokuElements[] = {1,2,3,4,5,6,7,8,9};
 int board [SIZE][SIZE];
 int customBoard [SIZE][SIZE] = {  4, 0, 0,
-                                  0, 0, 7,
+                                  0, 1, 7,
                                   9, 0, 0
                                         };
 
@@ -131,6 +132,7 @@ int main() {
         } while (again == 1);
 
     printf("\nThank you for using the Program!!!");
+    getch();
 
     return 0;
 }

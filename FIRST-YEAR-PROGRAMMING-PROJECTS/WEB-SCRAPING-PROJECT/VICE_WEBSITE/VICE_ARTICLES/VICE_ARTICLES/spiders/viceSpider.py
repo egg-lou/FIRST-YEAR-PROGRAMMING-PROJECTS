@@ -1,4 +1,4 @@
-import scrapy #
+import scrapy 
 import pandas as pd
  
 from ..items import ViceArticlesItem #To save the scraped content
