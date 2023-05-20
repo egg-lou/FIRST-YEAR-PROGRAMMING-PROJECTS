@@ -199,8 +199,8 @@ public class calculator implements ActionListener{
             }
             modeToggleButton.setBackground(Color.GRAY);
             modeToggleButton.setForeground(Color.WHITE);
-            equButton.setBackground(Color.ORANGE);  // Set equal button background color to orange
-            equButton.setForeground(Color.WHITE);  // Set equal button foreground color to white
+            equButton.setBackground(Color.ORANGE);  
+            equButton.setForeground(Color.WHITE);  
         } else {
             // Set light mode colors
             frame.getContentPane().setBackground(Color.WHITE);
@@ -217,8 +217,8 @@ public class calculator implements ActionListener{
             }
             modeToggleButton.setBackground(Color.LIGHT_GRAY);
             modeToggleButton.setForeground(Color.BLACK);
-            equButton.setBackground(Color.ORANGE);  // Set equal button background color to orange
-            equButton.setForeground(Color.WHITE);  // Set equal button foreground color to white
+            equButton.setBackground(Color.ORANGE);
+            equButton.setForeground(Color.WHITE); 
         }
     }
     
