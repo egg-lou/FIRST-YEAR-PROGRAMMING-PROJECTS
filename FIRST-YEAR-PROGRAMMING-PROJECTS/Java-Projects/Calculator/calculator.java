@@ -1,0 +1,225 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class calculator implements ActionListener{
+
+	JFrame frame;
+	JTextField textfield;
+	JButton[] numberButtons = new JButton[10];
+	JButton[] functionButtons = new JButton[9];
+	JButton addButton,subButton,mulButton,divButton;
+	JButton decButton, equButton, delButton, clrButton, negButton;
+	JPanel panel;
+    JToggleButton modeToggleButton;
+	
+	Font myFont = new Font("Courier New",Font.BOLD,30);
+	
+	double num1=0,num2=0,result=0;
+	char operator;
+    boolean isDarkMode = false;
+	
+	calculator(){
+		
+		frame = new JFrame("Calculator");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(420, 600);
+		frame.setLayout(null);
+		
+		textfield = new JTextField();
+		textfield.setBounds(50, 25, 300, 50);
+		textfield.setFont(myFont);
+		textfield.setEditable(false);
+		
+		addButton = new JButton("+");
+		subButton = new JButton("-");
+		mulButton = new JButton("*");
+		divButton = new JButton("/");
+		decButton = new JButton(".");
+		equButton = new JButton("=");
+		delButton = new JButton("Del");
+		clrButton = new JButton("Clr");
+		negButton = new JButton("(-)");
+        modeToggleButton = new JToggleButton("Mode");
+
+
+        modeToggleButton.setBounds(150, 500, 100, 50);
+        modeToggleButton.addActionListener(this);
+		
+		functionButtons[0] = addButton;
+		functionButtons[1] = subButton;
+		functionButtons[2] = mulButton;
+		functionButtons[3] = divButton;
+		functionButtons[4] = decButton;
+		functionButtons[5] = equButton;
+		functionButtons[6] = delButton;
+		functionButtons[7] = clrButton;
+		functionButtons[8] = negButton;
+		
+		for(int i =0;i<9;i++) {
+			functionButtons[i].addActionListener(this);
+			functionButtons[i].setFont(myFont);
+			functionButtons[i].setFocusable(false);
+		}
+		
+		for(int i =0;i<10;i++) {
+			numberButtons[i] = new JButton(String.valueOf(i));
+			numberButtons[i].addActionListener(this);
+			numberButtons[i].setFont(myFont);
+			numberButtons[i].setFocusable(false);
+		}
+		
+		negButton.setBounds(50,430,100,50);
+		delButton.setBounds(150,430,100,50);
+		clrButton.setBounds(250,430,100,50);
+		
+		panel = new JPanel();
+		panel.setBounds(50, 100, 300, 300);
+		panel.setLayout(new GridLayout(4,4,10,10));
+
+		panel.add(numberButtons[1]);
+		panel.add(numberButtons[2]);
+		panel.add(numberButtons[3]);
+		panel.add(addButton);
+		panel.add(numberButtons[4]);
+		panel.add(numberButtons[5]);
+		panel.add(numberButtons[6]);
+		panel.add(subButton);
+		panel.add(numberButtons[7]);
+		panel.add(numberButtons[8]);
+		panel.add(numberButtons[9]);
+		panel.add(mulButton);
+		panel.add(decButton);
+		panel.add(numberButtons[0]);
+		panel.add(equButton);
+		panel.add(divButton);
+		
+		frame.add(panel);
+		frame.add(negButton);
+		frame.add(delButton);
+		frame.add(clrButton);
+		frame.add(textfield);
+        frame.add(modeToggleButton);
+		frame.setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		
+		calculator calc = new calculator();
+        calc.updateMode();
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+        if(e.getSource() == modeToggleButton){
+            isDarkMode = modeToggleButton.isSelected();
+            updateMode();
+        }
+		
+		for(int i=0;i<10;i++) {
+			if(e.getSource() == numberButtons[i]) {
+				textfield.setText(textfield.getText().concat(String.valueOf(i)));
+			}
+		}
+		if(e.getSource()==decButton) {
+			textfield.setText(textfield.getText().concat("."));
+		}
+		if(e.getSource()==addButton) {
+			num1 = Double.parseDouble(textfield.getText());
+			operator ='+';
+			textfield.setText("");
+		}
+		if(e.getSource()==subButton) {
+			num1 = Double.parseDouble(textfield.getText());
+			operator ='-';
+			textfield.setText("");
+		}
+		if(e.getSource()==mulButton) {
+			num1 = Double.parseDouble(textfield.getText());
+			operator ='*';
+			textfield.setText("");
+		}
+		if(e.getSource()==divButton) {
+			num1 = Double.parseDouble(textfield.getText());
+			operator ='/';
+			textfield.setText("");
+		}
+		if(e.getSource()==equButton) {
+			num2=Double.parseDouble(textfield.getText());
+			
+			switch(operator) {
+			case'+':
+				result=num1+num2;
+				break;
+			case'-':
+				result=num1-num2;
+				break;
+			case'*':
+				result=num1*num2;
+				break;
+			case'/':
+				result=num1/num2;
+				break;
+			}
+			textfield.setText(String.valueOf(result));
+			num1=result;
+		}
+		if(e.getSource()==clrButton) {
+			textfield.setText("");
+		}
+		if(e.getSource()==delButton) {
+			String string = textfield.getText();
+			textfield.setText("");
+			for(int i=0;i<string.length()-1;i++) {
+				textfield.setText(textfield.getText()+string.charAt(i));
+			}
+		}
+		if(e.getSource()==negButton) {
+			double temp = Double.parseDouble(textfield.getText());
+			temp*=-1;
+			textfield.setText(String.valueOf(temp));
+		}
+	}
+
+    private void updateMode() {
+        if (isDarkMode) {
+            // Set dark mode colors
+            frame.getContentPane().setBackground(Color.DARK_GRAY);
+            textfield.setBackground(Color.BLACK);
+            textfield.setForeground(Color.WHITE);
+            panel.setBackground(Color.GRAY);
+            for (JButton button : numberButtons) {
+                button.setBackground(Color.DARK_GRAY);
+                button.setForeground(Color.WHITE);
+            }
+            for (JButton button : functionButtons) {
+                button.setBackground(Color.DARK_GRAY);
+                button.setForeground(Color.WHITE);
+            }
+            modeToggleButton.setBackground(Color.GRAY);
+            modeToggleButton.setForeground(Color.WHITE);
+            equButton.setBackground(Color.ORANGE);  // Set equal button background color to orange
+            equButton.setForeground(Color.WHITE);  // Set equal button foreground color to white
+        } else {
+            // Set light mode colors
+            frame.getContentPane().setBackground(Color.WHITE);
+            textfield.setBackground(Color.WHITE);
+            textfield.setForeground(Color.BLACK);
+            panel.setBackground(Color.LIGHT_GRAY);
+            for (JButton button : numberButtons) {
+                button.setBackground(Color.WHITE);
+                button.setForeground(Color.BLACK);
+            }
+            for (JButton button : functionButtons) {
+                button.setBackground(Color.WHITE);
+                button.setForeground(Color.BLACK);
+            }
+            modeToggleButton.setBackground(Color.LIGHT_GRAY);
+            modeToggleButton.setForeground(Color.BLACK);
+            equButton.setBackground(Color.ORANGE);  // Set equal button background color to orange
+            equButton.setForeground(Color.WHITE);  // Set equal button foreground color to white
+        }
+    }
+    
+}
