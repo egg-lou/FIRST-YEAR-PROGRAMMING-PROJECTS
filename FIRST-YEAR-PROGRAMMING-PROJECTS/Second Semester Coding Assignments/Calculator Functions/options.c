@@ -1,5 +1,5 @@
 void options(){
-
+    
     printf("\nCalculator\n");
     printf("----------------\n");
     printf("[1] Addition\n");

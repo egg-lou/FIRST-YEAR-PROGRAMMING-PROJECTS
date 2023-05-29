@@ -1,0 +1,2 @@
+Hi there I am Lucy!
+I am going to show you how to open a file in C

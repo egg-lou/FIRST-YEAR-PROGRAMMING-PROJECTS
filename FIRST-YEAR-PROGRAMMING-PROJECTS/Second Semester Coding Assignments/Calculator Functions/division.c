@@ -13,7 +13,6 @@ float division (){
         printf("\nSecond Number: ");
         scanf("%g", &num2);
 
-
         printf("\nResult: %g / %g = %g\n", num1, num2, num1/num2);
 
         do{
