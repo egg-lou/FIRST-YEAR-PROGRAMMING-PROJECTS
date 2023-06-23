@@ -1,50 +1,59 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
-int separator(){
+void separator(int *arrMain, int *arrOdd, int *arrEven, int size) {
+    int oddIndex = 0;
+    int evenIndex = 0;
 
-	for(int i = 0; i < size1; i++){
-
-	}
-
-	for(int i = 0; i < size2; i++)
-
+    for (int i = 0; i < size; i++) {
+        if (*(arrMain + i) % 2 == 0) {
+            *(arrEven + evenIndex) = *(arrMain + i);
+            evenIndex++;
+        } else {
+            *(arrOdd + oddIndex) = *(arrMain + i);
+            oddIndex++;
+        }
+    }
 }
 
+int main() {
+    int size, oddC = 0, evenC = 0;
 
+    printf("Input the number of elements to be stored in the array: ");
+    scanf("%d", &size);
 
+    int *arrMain = (int *)malloc(size * sizeof(int));
 
+    printf("Input %d elements in the array:\n", size);
 
-int main ()	{
-	
-	int size, oddC= 0, evenC = 0;
+    for (int i = 0; i < size; i++) {
+        printf("element - %d: ", i);
+        scanf("%d", arrMain + i);
+    }
 
-	printf("\nInput the number of elements to be stored in the array : ");
-	scanf("%d", &size);
+    for (int i = 0; i < size; i++) {
+        if (*(arrMain + i) % 2 == 0) {
+            evenC++;
+        } else {
+            oddC++;
+        }
+    }
 
-	int *arrMain = (int *)malloc(size * sizeof(int));
+    int *arrODD = (int *)malloc(oddC * sizeof(int));
+    int *arrEVEN = (int *)malloc(evenC * sizeof(int));
 
-	printf("Input %d elements in the array : \n", size);
+    separator(arrMain, arrODD, arrEVEN, size);
 
-	for(int i = 0; i < size; i++){
-		printf("element - %d : ", i);
-		scanf("%d", arrMain + i);
-	}
+    printf("\nThe Even elements are:\n");
+    for (int i = 0; i < evenC; i++) {
+        printf("%d ", *(arrEVEN + i));
+    }
 
-	for(int i = 0; i < size; i++){
-		if(*(arrMain + i) % 2 == 0){
-			evenC++;
-		}
-		else{
-			oddC++;
-		}
-	}
+    printf("\nThe odd elements are:\n");
+    for (int i = 0; i < oddC; i++) {
+        printf("%d ", *(arrODD + i));
+    }
 
-	int *arrODD = (int *)malloc(oddC * sizeof(int));
-	int *arrEVEN = (int *)malloc(evenC * sizeof(int));
-
-
-	
-	return 0;
-
+    return 0;
 }

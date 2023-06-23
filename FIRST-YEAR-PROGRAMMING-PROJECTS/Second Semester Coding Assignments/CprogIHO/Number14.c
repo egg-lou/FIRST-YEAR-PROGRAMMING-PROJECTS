@@ -1,24 +1,29 @@
 #include <stdio.h>
 
-int main ()	{
-	
-	int num1, num2, i;
-    int sum = 0, add = 0;
-	
-	printf("Kindly input your first number:");
-	scanf("%d", &num1);
-	printf("Kindly input your last number:");
-	scanf("%d", &num2);
-	
-	printf("Numbers from %d to %d that are divisible by 9: \n", num1, num2);
-	for (i=num1; num1<=num2;num1++)	{
-		if (num1 % 9 ==0)   {
-		printf("\t | %d |", num1);
-            add++;
-            sum+=num1;
-        }
+void summerPerfect(int *sum, int start, int end){
+	for(int i = start; i < end; i++){
+		if(i % 9 == 0){
+			printf("%d ", i);
+			*sum += i;
+		}
 	}
+}
 
-    printf("\nthe sum of the numbers divisible by 9 is: %d", sum);
+int main(){
+
+	int start, end;
+	int sum = 0;
+	int add = 0;
+
+	printf("Kindly input your starting number: ");
+	scanf("%d", &start);
+
+	printf("Kindly input your ending number: ");
+	scanf("%d", &end);
+
+	summerPerfect(&sum, start, end);
+
+	printf("\nThe sum of the numbers divisible by 9 is %d", sum);
+
 	return 0;
 }

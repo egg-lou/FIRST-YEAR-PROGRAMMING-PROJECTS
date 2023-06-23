@@ -11,7 +11,6 @@ void finder(float *arr, int size, float *largest){
             *largest = *(arr + i);
         }
     }
-
 }
 
 int main(){

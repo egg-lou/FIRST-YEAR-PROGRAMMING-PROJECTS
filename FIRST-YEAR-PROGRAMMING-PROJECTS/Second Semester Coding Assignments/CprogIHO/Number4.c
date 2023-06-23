@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void countFrequency(int arr[], int size) {
-    int frequency[size];
+    int *frequency = (int *) malloc (sizeof(int));
     int visited = -1;
 
     for (int i = 0; i < size; i++) {
@@ -31,7 +32,7 @@ int main() {
     printf("Input the number of elements to be stored in the array: ");
     scanf("%d", &size);
 
-    int arr[size];
+    int *arr = (int *) malloc (size * sizeof(int));
 
     printf("Input %d elements in the array:\n", size);
     for (int i = 0; i < size; i++) {

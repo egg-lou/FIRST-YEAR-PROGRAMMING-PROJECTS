@@ -4,12 +4,9 @@
 #define ROWS 3
 #define COLS 3
 
-void BubbleSortperRow(double **numbers, int ifAscend);
+void BubbleSort(double **numbers, int ifAscend);
 void GetArray(double **numbers);
 void PrintArray(double **numbers);
-void printBoard(double **numbers);
-void BubbleSortWhole(double **numbers, int ifAscend);
-
 
 int main()
 {
@@ -29,20 +26,15 @@ int main()
     printf("\n<== BEFORE SORTING ==>\n\n");
     PrintArray(numbers);
 
-    printBoard(numbers);
-
     printf("============================================================\n\n");
 
-    BubbleSortperRow(numbers, ifAscend);
-    BubbleSortWhole(numbers, ifAscend);
+    BubbleSort(numbers, ifAscend);
 
     printf("<== AFTER SORTING ==>\n\n");
     PrintArray(numbers);
-
-    printBoard(numbers);
 }
 
-void BubbleSortperRow(double **numbers, int ifAscend){
+void BubbleSort(double **numbers, int ifAscend){
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLS - 1; j++) {
             for (int k = 0; k < COLS - j - 1; k++) {
@@ -51,23 +43,6 @@ void BubbleSortperRow(double **numbers, int ifAscend){
                     *(*(numbers + i) + k) = *(*(numbers + i) + k + 1);
                     *(*(numbers + i) + k + 1) = temp;
                 }
-            }
-        }
-    }
-}
-
-void BubbleSortWhole(double **numbers, int ifAscend) {
-    int totalElements = ROWS * COLS;
-
-    for (int i = 0; i < totalElements; i++) {
-        for (int j = 0; j < totalElements - i - 1; j++) {
-            double *current = *(numbers + (j / COLS)) + j % COLS;
-            double *next = *(numbers + ((j + 1) / COLS)) + (j + 1) % COLS;
-
-            if ((*current > *next && ifAscend == 1) || (*current < *next && ifAscend == 2)) {
-                double temp = *current;
-                *current = *next;
-                *next = temp;
             }
         }
     }
@@ -91,30 +66,6 @@ void PrintArray(double **numbers){
         for (int j = 0; j < COLS; j++)
             printf("COLUMN %d: %g\n", j + 1, *(*(numbers + i) + j));
 
+        printf("\n");
     }
 }
-
-void printBoard(double **numbers){
-    for(int r = 0; r <  ROWS; r++){
-        if(r == 0 || r == 2)
-            printf("\n+------------------------+\n");
-        else   
-            printf("\n--------------------------\n");
-        for (int c = 0; c < COLS; c++){
-            printf("%s  %3g  %s", c < COLS ? "|" : "", *(*(numbers + r) + c), c == COLS - 1 ? " |" : "");
-        }
-    }
-    printf("\n+------------------------+\n");
-}
-
-
-
-
-/*
-
-Change Logs 
-1. added a printBoard function to print the 2d array as a table
-2. added a function to sort the whole 2d array
-
-
-*/

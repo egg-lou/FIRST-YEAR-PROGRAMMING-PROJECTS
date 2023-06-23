@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
 #define MAX_SIZE 10
 
 int summer(int *arr, int size){

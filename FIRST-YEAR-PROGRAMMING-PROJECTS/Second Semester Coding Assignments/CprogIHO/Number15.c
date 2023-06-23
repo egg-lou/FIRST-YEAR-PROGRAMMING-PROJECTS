@@ -18,7 +18,6 @@ int converter(long long int toConvert){
     return decimal;
 }
 
-
 int main(){
 
     int binary;

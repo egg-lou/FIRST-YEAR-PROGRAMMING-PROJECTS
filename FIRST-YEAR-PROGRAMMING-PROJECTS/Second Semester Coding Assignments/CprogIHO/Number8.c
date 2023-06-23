@@ -14,12 +14,11 @@ int converter(int toConvert){
     return binary;
 }
 
-
 int main(){
 
     int decimal;
 
-    printf("Input a binary number: ");
+    printf("Input a decimal number: ");
     scanf("%d", &decimal);
 
     long long int binary = converter(decimal);
