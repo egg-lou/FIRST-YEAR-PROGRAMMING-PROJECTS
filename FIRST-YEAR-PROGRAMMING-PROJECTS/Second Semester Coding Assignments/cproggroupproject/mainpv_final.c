@@ -170,8 +170,8 @@ void BubbleSortRows(double *p, int ifAscend) {
 void BubbleSortWhole(double *p, int ifAscend) {
     int totalElements = ROWS * COLS;
 
-    for (int i = 0; i < totalElements; i++) {
-        for (int j = 0; j < totalElements - i - 1; j++) {
+    for (i = 0; i < totalElements; i++) {
+        for (j = 0; j < totalElements - i - 1; j++) {
             // Calculate the row and column indices for the current and next elements
             double* current = p + j;
             double* next = p + j + 1;
@@ -203,7 +203,6 @@ void GetArray(double *p) {
 
 // Prints the contents of the 2 Dimensional array
 void printBoard(double *p) {
-    int i, j;
     for (i = 0; i < ROWS; i++) {
         if (i == 0 || i == 2)
             printf("\n+-----------------------+\n");

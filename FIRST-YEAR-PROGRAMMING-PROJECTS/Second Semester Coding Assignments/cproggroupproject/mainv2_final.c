@@ -206,7 +206,6 @@ void printBoard(double **numbers){
         else   
             printf("\n-------------------------\n");
         for (j = 0; j < COLS; j++){
-            // printf("%s  %3g  %s", j < COLS ? "|" : "", *(*(numbers + i) + j), j == COLS - 1 ? "|" : "");
             printf("%s%*s%*g%*s%s", j < COLS ? "|" : "", 
                                 (*(*(numbers + i) + j)) < 10 ? 3 : ((*(*(numbers + i) + j)) < 100) ? 3 : 2, "",
                                 (*(*(numbers + i) + j)) < 10 ? 1 : ((*(*(numbers + i) + j)) < 100) ? 2 : 3, 
@@ -265,7 +264,7 @@ int getAscendingOrDescending() {
 
         fflush(stdin);
 
-        fgets(input, sizeof(input), stdin);
+        gets(input);
 
         // Remove the trailing newline character
         input[strcspn(input, "\n")] = '\0';
@@ -314,7 +313,7 @@ char getYesOrNoInput(char response) {
 
     while (!isValidInput) {
         printf("\nEnter 'Y' for Yes or 'N' for No: ");
-        fgets(input, sizeof(input), stdin);
+        gets(input);
         input[strcspn(input, "\n")] = '\0';
 
         // Check if the input is a single character
