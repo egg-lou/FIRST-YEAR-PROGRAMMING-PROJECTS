@@ -1,0 +1,6 @@
+ID Number: 072003
+Name: Rafael Miguel
+CPROG Grade: 1.00
+DS1 Grade: 1.00
+GPA: 1.00
+
