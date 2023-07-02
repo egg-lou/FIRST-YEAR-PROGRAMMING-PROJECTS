@@ -149,9 +149,9 @@ int main()
 
 // Sorts each row of a 2D array using bubble sort in ascending or descending order
 void BubbleSortRows(double *p, int ifAscend) {
-    for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS - 1; j++) {
-            for (int k = 0; k < COLS - j - 1; k++) {
+    for (i = 0; i < ROWS; i++) {
+        for (j = 0; j < COLS - 1; j++) {
+            for (k = 0; k < COLS - j - 1; k++) {
 
                 double *current = (p + i * COLS + k);
                 double *next = (p + i * COLS + k + 1);
