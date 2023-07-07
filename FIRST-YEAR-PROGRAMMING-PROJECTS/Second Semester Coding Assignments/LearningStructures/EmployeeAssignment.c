@@ -1,6 +1,5 @@
 // Define a structure of  employee having data members name, address, age and salary.  Take data for n employee in an array dynamically and find the average salary.
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
