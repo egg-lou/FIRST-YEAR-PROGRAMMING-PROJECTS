@@ -1,4 +1,11 @@
-// Define a structure of  student having data members name, address, grade in C language, and grade in Information Management. Take data for n students in an array dynamically and find the total grade obtained.
+/*
+Author: Rafael Louie V. Miguel
+Year & Section: BSIT 1 - 4
+
+Problem:
+Define a structure of  student having data members name, address, grade in C language, and grade in Information Management. 
+Take data for n students in an array dynamically and find the total grade obtained.
+*/
 
 #include <stdio.h>
 #include <stdlib.h>

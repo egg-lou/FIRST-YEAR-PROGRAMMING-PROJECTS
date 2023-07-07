@@ -1,4 +1,11 @@
-// Define a structure of  employee having data members name, address, age and salary.  Take data for n employee in an array dynamically and find the average salary.
+/*
+Author: Rafael Louie V. Miguel
+Year & Section: BSIT 1 - 4
+
+Problem:
+Define a structure of  employee having data members name, address, age and salary.  
+Take data for n employee in an array dynamically and find the average salary.
+*/ 
 
 #include <stdio.h>
 #include <stdlib.h>
